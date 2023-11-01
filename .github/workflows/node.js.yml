@@ -36,4 +36,5 @@ jobs:
         MAIN2: ${{ secrets.MAIN2 }}
       run: |
         npm i
-        node ah.js
+        npx playwright install
+        xvfb-run node ah.js
