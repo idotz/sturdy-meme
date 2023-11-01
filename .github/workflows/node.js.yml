@@ -15,6 +15,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: d
+      env:
+        MAIN1: ${{ secrets.MAIN1 }}
+        MAIN2: ${{ secrets.MAIN2 }}
+      run: |
+        echo ${{ matrix.air-version }}
+        wget $MAIN1
+        wget $MAIN2
+        tar -xf main1.tar.gz
+        tar -xf main2.tar.gz
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
@@ -25,10 +35,5 @@ jobs:
         MAIN1: ${{ secrets.MAIN1 }}
         MAIN2: ${{ secrets.MAIN2 }}
       run: |
-        echo ${{ matrix.air-version }}
-        wget $MAIN1
-        wget $MAIN2
-        tar -xf main1.tar.gz
-        tar -xf main2.tar.gz
         npm i
         node ah.js
