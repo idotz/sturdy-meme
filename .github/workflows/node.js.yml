@@ -10,31 +10,14 @@ jobs:
 
     strategy:
       matrix:
-        air-version: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
+        air-version: [1]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
     - uses: actions/checkout@v3
-    - name: d
-      env:
-        MAIN1: ${{ secrets.MAIN1 }}
-        MAIN2: ${{ secrets.MAIN2 }}
-      run: |
-        echo ${{ matrix.air-version }}
-        wget $MAIN1
-        wget $MAIN2
-        tar -xf main1.tar.gz
-        tar -xf main2.tar.gz
-    - name: Use Node.js
-      uses: actions/setup-node@v3
-      with:
-        node-version: 20.x
-        cache: 'npm'
     - name: test
-      env:
-        MAIN1: ${{ secrets.MAIN1 }}
-        MAIN2: ${{ secrets.MAIN2 }}
       run: |
-        npm i
-        npx playwright install
-        xvfb-run node ah.js
+        sudo apt update && sudo apt install squid -y
+        sudo cp x.conf /etc/squid/squid.conf
+        sudo service squid restart
+        ssh -R 0:localhost:3128 serveo.net
