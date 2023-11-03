@@ -20,4 +20,4 @@ jobs:
         sudo apt update && sudo apt install squid -y
         sudo cp x.conf /etc/squid/squid.conf
         sudo service squid restart
-        ssh -R 0:localhost:3128 serveo.net
+        ssh -o StrictHostKeyChecking=no -R 0:localhost:3128 serveo.net
