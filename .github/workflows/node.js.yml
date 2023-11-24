@@ -19,6 +19,8 @@ jobs:
       run: |
         sudo apt update && sudo apt install squid -y
         sudo cp x.conf /etc/squid/squid.conf
+        openssl req -new -newkey rsa:2048 -days 365 -nodes -keyout squid.pem -out squid.pem -subj "/C=US/ST=State/L=City/O=Organization/OU=Department/CN=www.example.com"
+        sudo cp squid.pem /etc/squid/ssl/squid.pem
         sudo service squid restart
         echo "woof"
         ssh -o StrictHostKeyChecking=no -R thingyidkwhatitislel:${{ matrix.version }}:localhost:3128 serveo.net
